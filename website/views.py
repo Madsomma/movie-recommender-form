@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Result, Movie, Recommendation
 import csv
 import os
@@ -86,3 +86,17 @@ def end(request):
     par = "Please, share this form with one friend and keep helping us."
     context = {'title': title, 'par': par}
     return render(request, "website/end.html", context)
+
+
+def export(request):
+    response = HttpResponse(content_type='text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['user', 'movie_1', 'movie_2', 'movie_3', 'movie_4', 'rank_1', 'rank_2', 'rank_3', 'rank_4', 'date'])
+
+    for member in Result.objects.all().values_list('user', 'movie_1', 'movie_2', 'movie_3', 'movie_4', 'rank_1', 'rank_2', 'rank_3', 'rank_4', 'date'):
+        writer.writerow(member)
+
+    response['Content-Disposition'] = 'attachment; filename="results.csv"'
+
+    return response
