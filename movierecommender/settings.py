@@ -28,7 +28,7 @@ SECRET_KEY = 'pv9-a#mao0a6e710t3k2=p+1+x&j26y5^)wu6n)6hn7_p2uz7c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['movierecommenderd2020.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['movierecommender2020-kth.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
