@@ -16,7 +16,7 @@ def choice(request):
     module_dir = os.path.dirname(__file__)   # get current directory
     file_path = os.path.join(module_dir, 'static/db/10_movies.csv')   # full path to text.
     with open(file_path, encoding='utf-8') as f:
-        reader = csv.reader(f, delimiter='\t')
+        reader = csv.reader(f, delimiter=',')
         next(reader, None)  # skip the headers
         for row in reader:
             _, created = Movie.objects.get_or_create(
@@ -24,7 +24,7 @@ def choice(request):
                 title=row[1],
                 main_genre=row[2],
                 year=row[3],
-                img=row[4],
+                img=row[4]
             )
     movies = Movie.objects.all()
     context = {'title': "Select 3 movies",
