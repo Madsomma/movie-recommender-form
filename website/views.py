@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import Result, Movie, Recommendation
 import csv
+import os
 import json
 
 
@@ -27,7 +28,9 @@ def recommendation(request):
     print("Ids of chosen movies are: {}".format(ids_movies))
     id_fake = sum(ids_movies)
     print("Id fake user: {}".format(id_fake))
-    with open("../movielens/recommendations_db_final.csv", encoding='utf-8') as f:
+    module_dir = os.path.dirname(__file__)   # get current directory
+    file_path = os.path.join(module_dir, 'static/db/recommendations_db_final.csv')   # full path to text.
+    with open(file_path, encoding='utf-8') as f:
         reader = csv.reader(f, delimiter='\t')
         next(reader, None)  # skip the headers
         for row in reader:

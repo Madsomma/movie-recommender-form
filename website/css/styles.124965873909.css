@@ -1,0 +1,70 @@
+body {
+  overflow-x: hidden;
+}
+
+#message {
+  text-decoration: underline;
+  color: #0057D9;
+}
+
+.top-15 {
+  margin-top: 15px;
+}
+
+.homepage-container {
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.middle-center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.middle-center-2 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-home {
+  background-color: #f9dde8;
+  color: black;
+  border-color: #f9ddf9;
+  min-width: 90px;
+}
+
+.button {
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/* For Mobile */
+@media screen and (max-width: 540px) {
+  .crop {
+      width: 100vw;
+      height: 18vh;
+  }
+
+  .crop img {
+      width: 100vw;
+      height: 18vh;
+  }
+}
+
+/* For Tablets */
+@media screen and (min-width: 540px) and (max-width: 1920px) {
+  .crop {
+      width: 100vw;
+      height: 33vh;
+  }
+
+  .crop img {
+      width: 100vw;
+      height: 33vh;
+  }
+}

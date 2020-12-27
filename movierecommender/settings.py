@@ -28,7 +28,7 @@ SECRET_KEY = 'pv9-a#mao0a6e710t3k2=p+1+x&j26y5^)wu6n)6hn7_p2uz7c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['movierecommenderd2020.herokuapp.com']
+ALLOWED_HOSTS = ['movierecommenderd2020.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -44,8 +44,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,8 +121,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = BASE_DIR / 'website'
+
+# The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
 
 #  Add configuration for static files storage using whitenoise
