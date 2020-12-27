@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% block title %}<title>Movie recommender</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}?{% now "U" %}">
+</head>
+
+<body>
+  <div class="crop">
+    <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/movies-to-watch-1585258004.jpg?crop=1.00xw:0.5xh;0,0&resize=4000:*" alt="background image" />
+  </div>
+
+  <div class="homepage-container">
+    <h1 style="text-align: center; margin-top: 15px;">{{ title }}</h1>
+    <br />
+    <form method="POST" action = "{% url 'recommendation' %}"> {% csrf_token %}
+      {% if movie_first_5 %}
+      <div class="row">
+        {% for movie in movie_first_5 %}
+        <div class="col top-15 ">
+          <div class="card">
+            <img class="card-img-top" src="{{ movie.img }}" alt="Movie poster" style="min-width: 150px">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><b>{{ movie.title }}</b></h5>
+              <p class="card-text"><b>Year:</b> {{ movie.year }}</p>
+              <p class="card-text"><b>Genre:</b> {{ movie.main_genre }}</p>
+            </div>
+            <div style="text-align: center; background-color: #f9dde8;">
+              <input type="checkbox" id="{{ movie.title }}" name="movie" value="{{ movie.movieId }}">
+              <label for="{{ movie.title }}"> Select this movie </label>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>There was a problem when loading the movie list.</p>
+      {% endif %}
+
+      <br />
+
+      {% if movie_last_5 %}
+      <div class="row">
+        {% for movie in movie_last_5 %}
+        <div class="col top-15 ">
+          <div class="card">
+            <img class="card-img-top" src="{{ movie.img }}" alt="Movie poster" style="min-width: 140px">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><b>{{ movie.title }}</b></h5>
+              <p class="card-text"><b>Year:</b> {{ movie.year }}</p>
+              <p class="card-text"><b>Genre:</b> {{ movie.main_genre }}</p>
+            </div>
+            <div style="text-align: center; background-color: #f9dde8;">
+              <input type="checkbox" id="{{ movie.title }}" name="movie" value="{{ movie.movieId }}">
+              <label for="{{ movie.title }}"> Select this movie </label>
+            </div>
+          </div>
+        </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p>There was a problem when loading the movie list.</p>
+        {% endif %}
+        <br />
+        <div class="middle-center">
+              <input type="hidden" name="back" value="{{ request.path }}"  />
+              <input type="submit" name="Submit Form" href="recommendation"/>
+        </div>
+    </form>
+    <br />
+
+  </div>
+
+  <!--JS for Bootstrap-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
